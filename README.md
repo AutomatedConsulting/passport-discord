@@ -6,6 +6,10 @@ Passport strategy for authentication with [Discord](http://discordapp.com) throu
 
 Before using this strategy, it is strongly recommended that you read through the official docs page [here](https://discord.com/developers/docs/topics/oauth2), especially about the scopes and understand how the auth works.
 
+## Changes Compared to the Original This is Forked From
+- Added `disable_guild_select`, and `guild_id` parameters
+- Fixed bug wherein callback was called twice
+
 ## Usage
 `npm install passport-discord --save`
 
@@ -49,6 +53,12 @@ specific permissions your bot needs on the server ([permission codes](https://di
 
 ```javascript
 app.get("/auth/discord", passport.authenticate("discord", { permissions: 66321471 }));
+```
+
+Set default guild by providing a `guild_id`. Toggle displaying guilds dropdown with `disable_guild_select`.
+
+```javascript
+app.get("/auth/discord", passport.authenticate("discord", { disable_guild_select: true, guild_id: 'someid' }));
 ```
 
 #### Refresh Token Usage
